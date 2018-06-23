@@ -1,6 +1,7 @@
+const fs = require('fs');
 const app = require('http').createServer(handler);
 const io = require('socket.io')(app);
-const fs = require('fs');
+const mapEvents = require('./events/mapEvents');
 
 function handler(req, res) {
     fs.readFile(__dirname + '/public/index.html', (err, data) => {
@@ -19,17 +20,7 @@ app.listen(port, () => {
     console.log(`Backend is up and running on port ${port}`);
 });
 
-const connections = [];
+let store = {};
 io.on('connection', (socket) => {
-    console.log(`New Connection: ${socket.id}`);
-    connections.push(socket);
-    socket.on('disconnect', () => {
-        console.log(`Disconnected: ${socket.id}`);
-    });
-
-    socket.emit('welcome', {message: 'Hello from the server side'});
-
-    socket.on('welcome-ack', (data) => {
-        console.log(JSON.stringify(data));
-    });
+    mapEvents(socket, store);
 });
