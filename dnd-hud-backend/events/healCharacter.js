@@ -1,13 +1,14 @@
 module.exports = (socket, store) => {
-    socket.on('damageCharacter', (data) => {
+    socket.on('healCharacter', (data) => {
         const character = store[data.id];
-        const newHealth = character.currentHealth - data.damage;
+        const maximumHealth = character.maximumHealth;
+        const newHealth = character.currentHealth + data.damage;
 
         store = {
             ...store,
             [data.id]: {
                 ...store[data.id],
-                currentHealth: newHealth <= 0 ? 0 : newHealth
+                currentHealth: newHealth > maximumHealth ? maximumHealth : newHealth
             }
         };
 
