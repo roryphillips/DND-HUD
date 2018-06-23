@@ -63,10 +63,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapSocketToDispatch(socket, dispatch) {
-    socket.on('welcome', (data) => {
-        socket.emit('welcome-ack', {message: 'hello from the client side'});
-    });
-
     socket.on('characterAdded', (data) => {
         console.log(data);
         dispatch(addCharacter(data.id, data.character));

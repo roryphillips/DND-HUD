@@ -29,6 +29,7 @@ const store = {
         return this.state;
     }
 };
+
 io.on('connection', (socket) => {
     mapEvents(socket, store);
 });
