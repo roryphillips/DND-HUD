@@ -20,7 +20,10 @@ app.listen(port, () => {
     console.log(`Backend is up and running on port ${port}`);
 });
 
-let store = {};
+let store = {
+    characters: {},
+    initiative: {}
+};
 io.on('connection', (socket) => {
     mapEvents(socket, store);
 });
