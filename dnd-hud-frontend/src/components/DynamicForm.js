@@ -31,7 +31,9 @@ export class DynamicForm extends Component {
         const onInput = (e) => {
             this.props.onChange(control.key, e.target.value);
         };
-        return (<Input key={control.key} placeholder={control.placeholder} onChange={onInput}/>);
+        return (
+            <Input key={control.key} placeholder={control.placeholder} onChange={onInput}/>
+        );
     }
 
     renderSelect(control) {

@@ -64,7 +64,6 @@ function mapDispatchToProps(dispatch) {
 
 function mapSocketToDispatch(socket, dispatch) {
     socket.on('characterAdded', (data) => {
-        console.log(data);
         dispatch(addCharacter(data.id, data.character));
     });
 

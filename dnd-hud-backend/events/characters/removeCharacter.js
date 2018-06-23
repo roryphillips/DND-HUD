@@ -5,7 +5,7 @@ module.exports = (socket, store) => {
 
             store.setState({
                 ...state,
-                characters: Object.keys(store.characters).reduce((prev, key) => {
+                characters: Object.keys(state.characters).reduce((prev, key) => {
                     if (key !== data.id) prev[key] = state.characters[key];
                     return prev;
                 })

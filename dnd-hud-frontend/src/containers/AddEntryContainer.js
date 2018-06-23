@@ -18,19 +18,10 @@ function mapStateToProps(state, ownProps) {
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
-    const baseDispatch = {
-
-    };
-
-    const socketDispatch = {
+    return {
         addCharacter: (character) => {
             dispatch(socketAddCharacters(ownProps.socket, character));
         }
-    };
-
-    return {
-        ...baseDispatch,
-        ...socketDispatch
     };
 }
 
