@@ -12,7 +12,8 @@ module.exports = (socket, store) => {
             race: data.race,
             gender: data.gender,
             alignment: data.alignment,
-            faction: data.faction
+            faction: data.faction,
+            conditions: []
         };
         store = {
             ...store,
