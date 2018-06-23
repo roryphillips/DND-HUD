@@ -1,18 +1,15 @@
 module.exports = (socket, store) => {
     socket.on('removeCharacter', (data) => {
         if (data.id) {
-            let newStore = {};
+            const state = store.getState();
 
-            for (const key of Object.keys(store)) {
-                if (key !== data.id) {
-                    newStore[key] = store[key];
-                }
-            }
-
-
-            store = Object.keys(store).reduce((prev, key) => {
-                if (key !== data.id) prev[key] = store[key];
-            }, {});
+            store.setState({
+                ...state,
+                characters: Object.keys(state.characters).reduce((prev, key) => {
+                    if (key !== data.id) prev[key] = state.characters[key];
+                    return prev;
+                })
+            });
 
             socket.broadcast.emit('characterRemoved', {id: data.id, characters: store});
         }

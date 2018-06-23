@@ -20,10 +20,16 @@ app.listen(port, () => {
     console.log(`Backend is up and running on port ${port}`);
 });
 
-let store = {
-    characters: {},
-    initiative: {}
+const store = {
+    state: {},
+    setState(state) {
+        this.state = state;
+    },
+    getState() {
+        return this.state;
+    }
 };
+
 io.on('connection', (socket) => {
     mapEvents(socket, store);
 });

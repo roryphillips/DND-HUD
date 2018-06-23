@@ -6,13 +6,6 @@ module.exports = (socket, store) => {
     socket.on('disconnect', () => {
         console.log(`Disconnected: ${socket.id}`);
     });
-
-    socket.emit('welcome', {message: 'Hello from the server side'});
-
-    socket.on('welcome-ack', (data) => {
-        console.log(JSON.stringify(data));
-    });
-
-    registerCharacterEvents(socket, store.characters || {});
-    registerInitiativeEvents(socket, store.initiative || {});
+    registerCharacterEvents(socket, store);
+    registerInitiativeEvents(socket, store);
 };

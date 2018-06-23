@@ -1,29 +1,53 @@
-
-import {Component} from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 import io from 'socket.io-client';
+import {addCharacter} from "../store/actions/character";
 
+export const SocketContext = React.createContext(null);
 class SocketIOShell extends Component {
-    socket;
     dispatch;
 
-    componentDidMount() {
-        this.dispatch = this.props.dispatch;
+    state = {
+        socket: {},
+    };
 
-        this.socket = io.connect(`http://localhost:4000`);
-        mapSocketToDispatch(this.socket, this.dispatch);
+    constructor(props) {
+        super(props);
+        this.dispatch = this.props.dispatch;
+    }
+
+    componentDidMount() {
+        const socket = io.connect(`http://localhost:4000`);
+        this.setState({
+            socket: socket,
+        });
+        mapSocketToDispatch(socket, this.dispatch);
     }
 
     componentWillUnmount() {
-        if (!!this.socket) {
-            this.socket.disconnect();
+        if (!!this.state.socket) {
+            this.state.socket.disconnect();
         }
     }
 
     render() {
+        const {children} = this.props;
+        const {socket} = this.state;
+
         return (
-            {...this.props.children}
+            <React.Fragment>
+                {!socket && (
+                    <h1>Please Wait While Socket.IO Connects</h1>
+                )}
+                {socket && (
+                    <SocketContext.Provider value={socket}>
+                        <React.Fragment>
+                            {children}
+                        </React.Fragment>
+                    </SocketContext.Provider>
+                )}
+            </React.Fragment>
         );
     }
 }
@@ -33,13 +57,30 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return {};
+    return {
+        dispatch
+    };
 }
 
 function mapSocketToDispatch(socket, dispatch) {
-    socket.on('welcome', (res) => {
-        console.log(res);
-        socket.emit('welcome-ack', {message: 'hello from the client side'});
+    socket.on('characterAdded', (data) => {
+        dispatch(addCharacter(data.id, data.character));
+    });
+
+    socket.on('characterUpdated', (data) => {
+        console.log(data);
+    });
+
+    socket.on('characterRemoved', (data) => {
+        console.log(data);
+    });
+
+    socket.on('initiativeUpdated', (data) => {
+        console.log(data);
+    });
+
+    socket.on('turnUpdated', (data) => {
+        console.log(data);
     });
 }
 
