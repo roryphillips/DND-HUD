@@ -1,6 +1,7 @@
 module.exports = (socket, store) => {
-    socket.on('addAlly', (data) => {
-        const ally = {
+    socket.on('addCharacter', (data) => {
+        const character = {
+            type: data.type,
             name: data.name,
             level: data.level,
             classText: data.classText,
@@ -8,9 +9,10 @@ module.exports = (socket, store) => {
             maximumHealth: data.maximumHealth,
             race: data.race,
             gender: data.gender,
-            alignment: data.alignment
+            alignment: data.alignment,
+            faction: data.faction
         };
-        store = [...store, ally];
-        socket.broadcast.emit('allyAdded', ally);
+        store = [...store, character];
+        socket.broadcast.emit('characterAdded', character);
     });
 };

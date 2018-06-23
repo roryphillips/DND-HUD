@@ -1,4 +1,4 @@
-const registerAddAlly = require('./addAlly');
+const registerAddCharacter = require('./addCharacter');
 
 module.exports = (socket, store) => {
     console.log(`New Connection: ${socket.id}`);
@@ -12,5 +12,5 @@ module.exports = (socket, store) => {
         console.log(JSON.stringify(data));
     });
 
-    registerAddAlly(socket, store.allies || []);
+    registerAddCharacter(socket, store.characters || []);
 };
