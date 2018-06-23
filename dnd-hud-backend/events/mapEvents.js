@@ -1,7 +1,8 @@
 const registerAddCharacter = require('./addCharacter');
 const registerDamageCharacter = require('./damageCharacter');
 const registerHealCharacter = require('./healCharacter');
-const registerAddCondition = require('./addCondition');
+const registerAddCharacterCondition = require('./addCondition');
+const registerRemoveCharacterCondition = require ('./removeCondition');
 
 module.exports = (socket, store) => {
     console.log(`New Connection: ${socket.id}`);
@@ -18,5 +19,6 @@ module.exports = (socket, store) => {
     registerAddCharacter(socket, store.characters || {});
     registerDamageCharacter(socket, store.characters || {});
     registerHealCharacter(socket, store.characters || {});
-    registerAddCondition(socket, store.characters || {});
+    registerAddCharacterCondition(socket, store.characters || {});
+    registerRemoveCharacterCondition(socket, store.characters || {});
 };
