@@ -1,6 +1,7 @@
 module.exports = (socket, store) => {
     socket.on('setInitiative', (data) => {
         if (data.entries) {
+            const state = store.getState();
             const initiativeEntries = data.entries.map(entry => {
                 return {
                     id: entry.id || 'Unknown',
@@ -8,11 +9,13 @@ module.exports = (socket, store) => {
                 }
             }).sort((a, b) => a.score > b.score);
 
-            store = {
-                ...store,
-                currentTurn: 0,
-                entries: initiativeEntries
-            };
+            store.setState({
+                ...state,
+                initiative: {
+                    currentTurn: 0,
+                    entries: initiativeEntries
+                }
+            });
 
             socket.broadcast.emit('initiativeUpdated', initiativeEntries);
         }

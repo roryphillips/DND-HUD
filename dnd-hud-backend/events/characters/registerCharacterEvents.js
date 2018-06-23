@@ -6,10 +6,11 @@ const registerAddCharacterCondition = require('./addCondition');
 const registerRemoveCharacterCondition = require ('./removeCondition');
 
 module.exports = (socket, store) => {
-    registerAddCharacter(socket, store || {});
-    registerRemoveCharacter(socket, store || {});
-    registerDamageCharacter(socket, store || {});
-    registerHealCharacter(socket, store || {});
-    registerAddCharacterCondition(socket, store || {});
-    registerRemoveCharacterCondition(socket, store || {});
+
+    registerAddCharacter(socket, store);
+    registerRemoveCharacter(socket, store);
+    registerDamageCharacter(socket, store);
+    registerHealCharacter(socket, store);
+    registerAddCharacterCondition(socket, store);
+    registerRemoveCharacterCondition(socket, store);
 };

@@ -2,6 +2,7 @@ const uuid = require('uuid/v4');
 module.exports = (socket, store) => {
     socket.on('addCharacter', (data) => {
         if (data.id) {
+            const state = store.getState();
             const character = {
                 type: data.type || 'Unknown',
                 name: data.name || 'Unknown',
@@ -15,10 +16,15 @@ module.exports = (socket, store) => {
                 faction: data.faction || 'Unknown',
                 conditions: data.conditions || []
             };
-            store = {
-                ...store,
-                [data.id]: character
-            };
+
+            store.setState({
+                ...state,
+                characters: {
+                    ...state.characters || {},
+                    [data.id]: character
+                }
+            });
+
             socket.broadcast.emit('characterAdded', {id: data.id, character});
         }
     });

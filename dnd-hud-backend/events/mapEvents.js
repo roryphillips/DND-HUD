@@ -13,6 +13,6 @@ module.exports = (socket, store) => {
         console.log(JSON.stringify(data));
     });
 
-    registerCharacterEvents(socket, store.characters || {});
-    registerInitiativeEvents(socket, store.initiative || {});
+    registerCharacterEvents(socket, store);
+    registerInitiativeEvents(socket, store);
 };

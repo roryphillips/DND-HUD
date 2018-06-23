@@ -4,6 +4,8 @@ import {addCharacter} from "../actions/character";
 
 export function socketAddCharacters(socket, character) {
     return (dispatch) => {
-        socket.emit('addCharacter', {id: uuid(), character});
+        const id = uuid();
+        socket.emit('addCharacter', {id, character});
+        dispatch(addCharacter(id, character));
     }
 }

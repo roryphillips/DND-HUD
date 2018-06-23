@@ -3,15 +3,13 @@ import {Component} from 'react';
 import {connect} from 'react-redux';
 import {withSocket} from "./withSocket";
 import {socketAddCharacters} from "../store/sagas/characters";
+import {AddEntry} from "../components/AddEntry";
 
 class AddEntryContainer extends Component {
-    dispatch;
-
-    componentDidMount() {
-        this.dispatch = this.props.dispatch;
-    }
-
     render() {
+        return (
+            <AddEntry {...this.props}/>
+        )
     }
 }
 
@@ -32,7 +30,7 @@ function mapDispatchToProps(dispatch, ownProps) {
 
     return {
         ...baseDispatch,
-        ...(!!ownProps.socket ? socketDispatch : {})
+        ...socketDispatch
     };
 }
 
