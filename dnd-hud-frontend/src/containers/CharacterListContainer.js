@@ -12,13 +12,15 @@ class CharacterListContainer extends Component {
 
     render() {
         const { characters } = this.props;
-        const allys = characters.filter(character => character.type === 'Ally');
+        const allies = characters.filter(character => character.type === 'Ally');
         const enemies = characters.filter(character => character.type === 'Enemy');
         const neutral = characters.filter(character => character.type === 'Neutral');
 
         return (
             <div>
-                <CharacterList items={}/>
+                {allies.length > 0 && <CharacterList name="Allies" items={allies}/>}
+                {enemies.length > 0 && <CharacterList name="Enemies" items={enemies}/>}
+                {neutral.length > 0 && <CharacterList name="Neutral" items={neutral}/>}
             </div>
         );
     }

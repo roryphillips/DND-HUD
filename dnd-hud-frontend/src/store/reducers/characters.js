@@ -1,4 +1,4 @@
-import {ADD_CHARACTER} from "../actions/character";
+import {ADD_CHARACTER, SYNC_CHARACTERS} from "../actions/character";
 
 export default function characters(state = {}, action) {
     switch (action.type) {
@@ -6,6 +6,11 @@ export default function characters(state = {}, action) {
             return {
                 ...state,
                 [action.id]: action.character
+            };
+
+        case SYNC_CHARACTERS:
+            return {
+                ...action.characters
             };
 
         default:

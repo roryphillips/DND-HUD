@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 import io from 'socket.io-client';
-import {addCharacter} from "../store/actions/character";
+import {addCharacter, syncCharacters} from "../store/actions/character";
 
 export const SocketContext = React.createContext(null);
 class SocketIOShell extends Component {
@@ -63,6 +63,10 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapSocketToDispatch(socket, dispatch) {
+    socket.on('syncCharacters', (data) => {
+        dispatch(syncCharacters(data || {}));
+    });
+
     socket.on('characterAdded', (data) => {
         dispatch(addCharacter(data.id, data.character));
     });

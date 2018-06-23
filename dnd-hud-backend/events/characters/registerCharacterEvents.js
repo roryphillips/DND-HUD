@@ -6,7 +6,7 @@ const registerAddCharacterCondition = require('./addCondition');
 const registerRemoveCharacterCondition = require ('./removeCondition');
 
 module.exports = (socket, store) => {
-
+    socket.emit('syncCharacters', store.getState().characters);
     registerAddCharacter(socket, store);
     registerRemoveCharacter(socket, store);
     registerDamageCharacter(socket, store);

@@ -56,7 +56,6 @@ export class AddEntry extends Component {
         return (
             <div>
                 <Button type="primary" onClick={this.showModal}>Add Character</Button>
-                <code>{JSON.stringify(this.state.character)}</code>
                 <Modal
                     title="Add Character"
                     visible={this.state.visible}
