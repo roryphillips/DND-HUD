@@ -1,4 +1,5 @@
 const registerAddCharacter = require('./addCharacter');
+const registerDamageCharacter = require('./damageCharacter');
 
 module.exports = (socket, store) => {
     console.log(`New Connection: ${socket.id}`);
@@ -12,5 +13,6 @@ module.exports = (socket, store) => {
         console.log(JSON.stringify(data));
     });
 
-    registerAddCharacter(socket, store.characters || []);
+    registerAddCharacter(socket, store.characters || {});
+    registerDamageCharacter(socket, store.characters || {});
 };
