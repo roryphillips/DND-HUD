@@ -37,9 +37,29 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapSocketToDispatch(socket, dispatch) {
-    socket.on('welcome', (res) => {
-        console.log(res);
+    socket.on('welcome', (data) => {
+        console.log(data);
         socket.emit('welcome-ack', {message: 'hello from the client side'});
+    });
+
+    socket.on('characterAdded', (data) => {
+
+    });
+
+    socket.on('characterUpdated', (data) => {
+
+    });
+
+    socket.on('characterRemoved', (data) => {
+
+    });
+
+    socket.on('initiativeUpdated', (data) => {
+
+    });
+
+    socket.on('turnUpdated', (data) => {
+
     });
 }
 
