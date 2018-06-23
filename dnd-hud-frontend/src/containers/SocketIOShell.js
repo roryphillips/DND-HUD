@@ -1,9 +1,10 @@
-
-import {Component} from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 import io from 'socket.io-client';
+import {addCharacter} from "../store/actions/character";
 
+export const SocketContext = React.createContext(null);
 class SocketIOShell extends Component {
     socket;
     dispatch;
@@ -23,7 +24,11 @@ class SocketIOShell extends Component {
 
     render() {
         return (
-            {...this.props.children}
+            <SocketContext.Provider value={this.socket}>
+                <React.Fragment>
+                    {this.props.children}
+                </React.Fragment>
+            </SocketContext.Provider>
         );
     }
 }
@@ -43,7 +48,7 @@ function mapSocketToDispatch(socket, dispatch) {
     });
 
     socket.on('characterAdded', (data) => {
-
+        dispatch(addCharacter(data.id, data.character));
     });
 
     socket.on('characterUpdated', (data) => {
