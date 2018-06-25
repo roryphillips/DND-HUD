@@ -55,7 +55,7 @@ export class CharacterListItem extends Component {
         const hpPercentage = this.calculatePercentage(character.currentHealth, character.maximumHealth);
         return (
             <div className={this.props.isSelected ? 'selected-card' : ''} onClick={this.onClick}>
-                {!isDM &&
+                {!isDM && character.isVisible &&
                 <Card
                     title={`${character.name}`}
                     extra={`${character.gender} - ${character.race}`}

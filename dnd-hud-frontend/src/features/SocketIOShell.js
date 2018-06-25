@@ -18,7 +18,7 @@ class SocketIOShell extends Component {
     }
 
     componentDidMount() {
-        const socket = io.connect(`http://localhost:4000`);
+        const socket = io.connect(`http://192.168.0.35:4000`);
         this.setState({
             socket: socket,
         });

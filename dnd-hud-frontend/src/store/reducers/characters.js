@@ -2,7 +2,7 @@ import {
     ADD_CHARACTER,
     CHARACTER_UPDATED,
     DAMAGE_SELECTED_CHARACTERS,
-    HEAL_SELECTED_CHARACTERS,
+    HEAL_SELECTED_CHARACTERS, SHOW_HIDE_CHARACTERS,
     SYNC_CHARACTERS
 } from "../actions/character";
 
@@ -49,6 +49,24 @@ export default function characters(state = {}, action) {
             return {
                 ...state,
                 ...healedCharacters
+            };
+
+        case SHOW_HIDE_CHARACTERS:
+            const showHideCharacters = action.ids.reduce((result, id) => {
+                const character = state[id];
+                if (!character) return result;
+
+                result[id] = {
+                    ...character,
+                    isVisible: action.visibility
+                };
+
+                return result;
+            }, {});
+
+            return {
+                ...state,
+                ...showHideCharacters
             };
 
         case SYNC_CHARACTERS:
