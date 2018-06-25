@@ -4,6 +4,9 @@ module.exports = (socket, store) => {
             for (const id of data.ids) {
                 const state = store.getState();
                 const character = state.characters[id];
+                if (!character) {
+                    socket.broadcast.emit('syncCharacters', store.getState().characters);
+                }
                 const newHealth = character.currentHealth - data.damage;
                 const newCharacter = {
                     ...character,

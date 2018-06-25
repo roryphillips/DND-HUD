@@ -1,4 +1,10 @@
-import {ADD_CHARACTER, CHARACTER_UPDATED, DAMAGE_SELECTED_CHARACTERS, SYNC_CHARACTERS} from "../actions/character";
+import {
+    ADD_CHARACTER,
+    CHARACTER_UPDATED,
+    DAMAGE_SELECTED_CHARACTERS,
+    HEAL_SELECTED_CHARACTERS,
+    SYNC_CHARACTERS
+} from "../actions/character";
 
 export default function characters(state = {}, action) {
     switch (action.type) {
@@ -25,6 +31,24 @@ export default function characters(state = {}, action) {
             return {
                 ...state,
                 ...damagedCharacters
+            };
+
+        case HEAL_SELECTED_CHARACTERS:
+            const healedCharacters = action.ids.reduce((result, id) => {
+                const character = state[id];
+                if (!character) return result;
+
+                const newHealth = character.currentHealth + action.damage;
+                result[id] = {
+                    ...character,
+                    currentHealth: newHealth > character.maximumHealth ? character.maximumHealth : newHealth
+                };
+                return result;
+            }, {});
+
+            return {
+                ...state,
+                ...healedCharacters
             };
 
         case SYNC_CHARACTERS:

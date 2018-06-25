@@ -5,6 +5,7 @@ import AddEntryContainer from "./dm-manipulation/AddEntryContainer";
 import CharacterListContainer from "./character-list/CharacterListContainer";
 import DMSwitchContainer from "./dm-manipulation/DMSwitchContainer";
 import DamageEntriesContainer from "./dm-manipulation/DamageEntriesContainer";
+import HealEntriesContainer from "./dm-manipulation/HealEntriesContainer";
 
 export class Root extends Component {
     render() {
@@ -16,6 +17,7 @@ export class Root extends Component {
                     <Col span={3} style={{textAlign: 'left'}}>
                         <AddEntryContainer/>
                         <DamageEntriesContainer/>
+                        <HealEntriesContainer/>
                     </Col>}
                     <Col span={this.props.isDM ? 16 : 18}>
                         <CharacterListContainer/>

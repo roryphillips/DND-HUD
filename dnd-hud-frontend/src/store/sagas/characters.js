@@ -1,6 +1,6 @@
 import uuid from 'uuid/v4';
 
-import {addCharacter, damageCharacters} from "../actions/character";
+import {addCharacter, damageCharacters, healCharacters} from "../actions/character";
 
 export function socketAddCharacters(socket, character) {
     return (dispatch) => {
@@ -15,5 +15,13 @@ export function socketDamageCharacters(socket, damage) {
         const ids = getState().ui.selectedCharacters;
         socket.emit('damageCharacters', {ids, damage});
         dispatch(damageCharacters(ids, damage));
+    }
+}
+
+export function socketHealCharacters(socket, healing) {
+    return (dispatch, getState) => {
+        const ids = getState().ui.selectedCharacters;
+        socket.emit('healCharacters', {ids, healing});
+        dispatch(healCharacters(ids, healing));
     }
 }
