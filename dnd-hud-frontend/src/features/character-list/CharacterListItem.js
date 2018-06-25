@@ -1,8 +1,9 @@
 import * as React from 'react';
 import {Component} from 'react';
-import {Card, Progress} from 'antd';
-
+import {Card, Progress, Avatar} from 'antd';
 import './CharacterListItem.css';
+
+
 export class CharacterListItem extends Component {
     constructor(props) {
         super(props);
@@ -24,6 +25,9 @@ export class CharacterListItem extends Component {
     }
 
     getDescriptionForPercentage(percentage) {
+        if (percentage < 1) {
+            return 'Unconscious';
+        }
         if (percentage < 10) {
             return 'Badly Bruised and Haggard'
         }
@@ -51,20 +55,27 @@ export class CharacterListItem extends Component {
         const hpPercentage = this.calculatePercentage(character.currentHealth, character.maximumHealth);
         return (
             <div className={this.props.isSelected ? 'selected-card' : ''} onClick={this.onClick}>
-            {!isDM &&
-                <Card  title={`${character.name}`}>
-                    <p>{this.getDescriptionForPercentage(hpPercentage)}</p>
+                {!isDM &&
+                <Card
+                    title={`${character.name}`}
+                    extra={`${character.gender} - ${character.race}`}
+                    >
+                    <Avatar shape="square" size="large" icon="user"/>
+                    <h3>{this.getDescriptionForPercentage(hpPercentage)}</h3>
                 </Card>
-            }
-            {isDM &&
-                <Card title={`${character.name} - lvl. ${character.level}`} >
+                }
+                {isDM &&
+                <Card
+                    title={`${character.name}`}
+                    extra={`${character.level}. ${character.classText}`}
+                >
                     <Progress
-                              percent={hpPercentage}
-                              format={percent => `${character.currentHealth} / ${character.maximumHealth}`}
-                              status={this.getStatusForPercentage(hpPercentage)}
+                        percent={hpPercentage}
+                        format={percent => `${character.currentHealth} / ${character.maximumHealth}`}
+                        status={this.getStatusForPercentage(hpPercentage)}
                     />
                 </Card>
-            }
+                }
             </div>
         );
     }

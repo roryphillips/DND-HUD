@@ -1,22 +1,24 @@
 module.exports = (socket, store) => {
-    socket.on('damageCharacter', (data) => {
+    socket.on('damageCharacters', (data) => {
         if (data.damage) {
-            const state = store.getState();
-            const character = state.characters[data.id];
-            const newHealth = character.currentHealth - data.damage;
-
-            store.setState({
-                ...state,
-                characters: {
-                    ...state.characters,
-                    [data.id]: {
-                        ...store[data.id],
-                        currentHealth: newHealth <= 0 ? 0 : newHealth
+            for (const id of data.ids) {
+                const state = store.getState();
+                const character = state.characters[id];
+                const newHealth = character.currentHealth - data.damage;
+                const newCharacter = {
+                    ...character,
+                    currentHealth: newHealth <= 0 ? 0 : newHealth
+                };
+                store.setState({
+                    ...state,
+                    characters: {
+                        ...state.characters,
+                        [id]: newCharacter
                     }
-                }
-            });
+                });
 
-            socket.broadcast.emit('characterUpdated', {id: data.id, character: store[data.id]});
+                socket.broadcast.emit('characterUpdated', {id: id, character: newCharacter});
+            }
         }
     });
 };

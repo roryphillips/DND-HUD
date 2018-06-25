@@ -61,7 +61,9 @@ export class AddEntry extends Component {
                     visible={this.state.visible}
                     onOk={this.handleOk}
                     onCancel={this.handleCancel}>
+                    {this.state.visible &&
                     <DynamicForm input={form} onChange={this.updateCharacter} onSubmit={this.onSubmit}/>
+                    }
                 </Modal>
             </div>
         );

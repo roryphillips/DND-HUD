@@ -4,6 +4,7 @@ import {Row, Col} from 'antd';
 import AddEntryContainer from "./dm-manipulation/AddEntryContainer";
 import CharacterListContainer from "./character-list/CharacterListContainer";
 import DMSwitchContainer from "./dm-manipulation/DMSwitchContainer";
+import DamageEntriesContainer from "./dm-manipulation/DamageEntriesContainer";
 
 export class Root extends Component {
     render() {
@@ -12,13 +13,14 @@ export class Root extends Component {
                 <DMSwitchContainer/>
                 <Row gutter={16}>
                     {this.props.isDM &&
-                    <Col span={3}>
+                    <Col span={3} style={{textAlign: 'left'}}>
                         <AddEntryContainer/>
+                        <DamageEntriesContainer/>
                     </Col>}
-                    <Col span={this.props.isDM ? 14 : 16}>
+                    <Col span={this.props.isDM ? 16 : 18}>
                         <CharacterListContainer/>
                     </Col>
-                    <Col span={this.props.isDM ? 7 : 8}>
+                    <Col span={this.props.isDM ? 5 : 6}>
                         An Initiative Ladder Goes Here
                     </Col>
                 </Row>
