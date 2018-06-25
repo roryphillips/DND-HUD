@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Component} from 'react';
 import {connect} from 'react-redux';
-import {CharacterList} from "../components/CharacterList";
+import {CharacterList} from "./CharacterList";
 
 class CharacterListContainer extends Component {
     dispatch;
@@ -28,7 +28,13 @@ class CharacterListContainer extends Component {
 
 function mapStateToProps(state) {
     return {
-        characters: Object.keys(state.characters).map(key => {return {key, ...state.characters[key]}})
+        characters: Object.keys(state.characters).map(key => {
+            const character = state.characters[key];
+            return {
+                id: key,
+                type: character.type
+            };
+        })
     };
 }
 

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Component} from 'react';
 import {Button, Modal} from 'antd';
-import {DynamicForm} from "./DynamicForm";
+import {DynamicForm} from "../common/DynamicForm";
 
 const form = [
     {key: 'type', label: 'Type', type: 'select', options: ['Ally', 'Enemy', 'Neutral']},
@@ -55,7 +55,7 @@ export class AddEntry extends Component {
     render() {
         return (
             <div>
-                <Button type="primary" onClick={this.showModal}>Add Character</Button>
+                <Button onClick={this.showModal}>Add Character</Button>
                 <Modal
                     title="Add Character"
                     visible={this.state.visible}

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Component} from 'react';
-import {CharacterListItem} from "./CharacterListItem";
+import CharacterListItemContainer from "./CharacterListItemContainer";
 
 import { Row, Col } from 'antd';
 
@@ -12,7 +12,7 @@ export class CharacterList extends Component {
                 <Row gutter={16}>
                 {this.props.items.map((item, key) => {
                     return (
-                        <Col key={key} span={8}><CharacterListItem character={item}/></Col>
+                        <Col key={key} span={8}><CharacterListItemContainer id={item.id}/></Col>
                     )
                 })}
                 </Row>

@@ -1,9 +1,9 @@
 import * as React from 'react';
 import {Component} from 'react';
 import {connect} from 'react-redux';
-import {withSocket} from "./withSocket";
-import {socketAddCharacters} from "../store/sagas/characters";
-import {AddEntry} from "../components/AddEntry";
+import {withSocket} from "../common/withSocket";
+import {socketAddCharacters} from "../../store/sagas/characters";
+import {AddEntry} from "./AddEntry";
 
 class AddEntryContainer extends Component {
     render() {
