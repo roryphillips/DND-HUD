@@ -12,7 +12,7 @@ const template = {
 
 class DamageEntriesModal extends Component {
     render() {
-        const {visible, onCancel, onCreate: onDamage, form} = this.props;
+        const {visible, onCancel, onDamage, form} = this.props;
         const {getFieldDecorator} = form;
         return (
             <Modal
