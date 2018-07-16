@@ -5,6 +5,7 @@ import io from 'socket.io-client';
 import {addCharacter, characterUpdated, syncCharacters} from "../store/actions/character";
 
 export const SocketContext = React.createContext(null);
+
 class SocketIOShell extends Component {
     dispatch;
 
@@ -18,7 +19,11 @@ class SocketIOShell extends Component {
     }
 
     componentDidMount() {
-        const socket = io.connect(`http://192.168.0.35:4000`);
+        const host = process.env.NODE_ENV === 'Production'
+            ? window.location.host
+            : 'http://localhost:4000`';
+
+        const socket = io.connect(host);
         this.setState({
             socket: socket,
         });

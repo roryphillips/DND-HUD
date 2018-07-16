@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Component} from 'react';
-import {DynamicForm} from "../common/DynamicForm";
+import DynamicForm from "../../common/DynamicForm";
 import {Button, Modal} from 'antd';
 
 const form = [
@@ -8,32 +8,26 @@ const form = [
 ];
 
 export class DamageEntries extends Component {
-    state = {visible: false, damage: 0};
+    state = {modalVisible: false};
 
     showModal = () => {
         this.setState({
-            visible: true,
+            modalVisible: true,
         });
     };
 
-    handleOk = (e) => {
-        this.setState({
-            visible: false,
-        });
-        this.props.damageCharacters(this.state.damage || 0);
-        this.state.damage = 0;
-    };
     handleCancel = (e) => {
         this.setState({
-            visible: false,
+            modalVisible: false,
         });
     };
 
-    updateDamage = (key, value) => {
+    onSubmit = (e) => {
         this.setState({
-            ...this.state,
-            damage: value
+            modalVisible: false
         });
+        console.log(e);
+        this.props.damageCharacters(this.state.damage || 0);
     };
 
     render() {
@@ -42,11 +36,14 @@ export class DamageEntries extends Component {
                 <Button onClick={this.showModal}>Damage Characters</Button>
                 <Modal
                     title="Damage Characters"
-                    visible={this.state.visible}
-                    onOk={this.handleOk}
+                    visible={this.state.modalVisible}
                     onCancel={this.handleCancel}
+                    footer={[
+                        <span key={1}>&nbsp;</span>,
+                        <span key={2}>&nbsp;</span>
+                    ]}
                 >
-                    <DynamicForm input={form} onChange={this.updateDamage}/>
+                    <DynamicForm input={form} onSubmit={this.onSubmit}/>
                 </Modal>
             </div>
         );

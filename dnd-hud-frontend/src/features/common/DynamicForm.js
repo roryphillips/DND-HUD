@@ -2,75 +2,60 @@ import * as React from 'react';
 import {Component} from 'react';
 
 import {Form, Input, InputNumber, Select} from 'antd';
+const FormItem = {Form};
 const Option = Select.Option;
 
-export class DynamicForm extends Component {
+export default class DynamicForm extends Component {
     formItemLayout = {
         labelCol: {
-            xs: { span: 24 },
-            sm: { span: 8 },
+            xs: {span: 24},
+            sm: {span: 8},
         },
         wrapperCol: {
-            xs: { span: 24 },
-            sm: { span: 16 }
+            xs: {span: 24},
+            sm: {span: 16}
         }
     };
+
+    constructor(props) {
+        super(props);
+        this.renderFormItem = this.renderFormItem.bind(this);
+    }
+
+    renderFormItem(control, key) {
+        const decoratedControl = this.props.getFieldDecorator(control.key, {
+            rules: control.rules
+        })(this.renderControl(control));
+
+        return (
+            <Form.Item key={key} label={control.label}>
+                {decoratedControl}
+            </Form.Item>
+        );
+    }
 
     renderControl(control) {
         switch (control.type) {
             case 'input':
-                return this.renderInput(control);
-            case 'select':
-                return this.renderSelect(control);
+                return <Input/>;
             case 'number':
-                return this.renderNumber(control);
+                return <InputNumber min={control.min} max={control.max} initialValue={control.min}/>;
+            case 'select':
+                return (
+                    <Select>
+                        {control.options.map((item, key) => {
+                            return <Option key={key} value={item}>{item}</Option>
+                        })}
+                    </Select>
+                );
         }
     }
 
-    renderInput(control) {
-        const onInput = (e) => {
-            this.props.onChange(control.key, e.target.value);
-        };
-        return (
-            <Input key={control.key} placeholder={control.placeholder} onChange={onInput}/>
-        );
-    }
-
-    renderSelect(control) {
-        const onSelect = (e) => {
-            this.props.onChange(control.key, e);
-        };
-        return (
-            <Select key={control.key} style={{width: '100%'}} onChange={onSelect}>
-                {control.options.map((option, key) => {
-                    return <Option key={key} value={option}>{option}</Option>
-                })}
-            </Select>
-        );
-    }
-
-    renderNumber(control) {
-        const onChange = (e) => {
-            this.props.onChange(control.key, e);
-        };
-        return (
-            <InputNumber min={control.min} max={control.max} defaultValue={control.min} onChange={onChange}/>
-        )
-    }
-
     render() {
+        const {template} = this.props;
         return (
-            <Form onSubmit={this.props.onSubmit}>
-                {this.props.input.map((control, key) => {
-                    return (
-                        <Form.Item
-                            key={key}
-                            label={control.label}
-                            {...this.formItemLayout}>
-                            {this.renderControl(control)}
-                        </Form.Item>
-                    );
-                })}
+            <Form layout={template.layout}>
+                {template.controls.map((item, key) => this.renderFormItem(item, key))}
             </Form>
         );
     }
