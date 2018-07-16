@@ -2,49 +2,49 @@ import * as React from 'react';
 import {Component} from 'react';
 import DynamicForm from "../../common/DynamicForm";
 import {Button, Modal} from 'antd';
+import HealEntriesModal from "./HealEntriesModal";
 
-const form = [
-    {key: 'damage', label: 'Damage', type: 'number', min: 0, max: 10000}
-];
+
 
 export class HealEntries extends Component {
-    state = {modalVisible: false};
+    state = {visible: false};
+
+    constructor(props) {
+        super(props);
+    }
 
     showModal = () => {
-        this.setState({
-            modalVisible: true,
-        });
+        this.setState({visible: true});
     };
 
-    handleCancel = (e) => {
-        this.setState({
-            modalVisible: false,
-        });
+    handleCancel = () => {
+        this.setState({visible: false});
     };
 
-    onSubmit = (e) => {
-        this.setState({
-            modalVisible: false
-        });
-        console.log(e);
-        this.props.healCharacters(this.state.damage || 0);
+    handleHeal = () => {
+        const form = this.formRef.props.form;
+        form.validateFields((err, values) => {
+            if (err) return;
+            form.resetFields();
+            this.setState({visible: false});
+            this.props.healCharacters(values.damage);
+        })
+    };
+
+    saveFormRef = (formRef) => {
+        this.formRef = formRef;
     };
 
     render() {
         return (
             <div>
-                <Button onClick={this.showModal}>Heal Characters</Button>
-                <Modal
-                    title="Damage Characters"
-                    visible={this.state.modalVisible}
+                <Button onClick={this.showModal}>Heal Selected Characters</Button>
+                <HealEntriesModal
+                    wrappedComponentRef={this.saveFormRef}
+                    visible={this.state.visible}
                     onCancel={this.handleCancel}
-                    footer={[
-                        <span key={1}>&nbsp;</span>,
-                        <span key={2}>&nbsp;</span>
-                    ]}
-                >
-                    <DynamicForm input={form} onSubmit={this.onSubmit}/>
-                </Modal>
+                    onHeal={this.handleHeal}
+                />
             </div>
         );
     }

@@ -17,8 +17,8 @@ export class Root extends Component {
                     {this.props.isDM &&
                     <Col span={3} style={{textAlign: 'left'}}>
                         <AddEntryContainer/>
-                        {/*<DamageEntriesContainer/>*/}
-                        {/*<HealEntriesContainer/>*/}
+                        <DamageEntriesContainer/>
+                        <HealEntriesContainer/>
                         <ShowEntriesContainer/>
                     </Col>}
                     <Col span={this.props.isDM ? 16 : 18}>

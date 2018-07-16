@@ -37,7 +37,7 @@ export class AddEntry extends Component {
     render() {
         return (
             <div>
-                <Button type="primary" onClick={this.showModal}>Add Entry</Button>
+                <Button type="primary" onClick={this.showModal}>Add Character</Button>
                 <AddEntryModal
                     wrappedComponentRef={this.saveFormRef}
                     visible={this.state.visible}
