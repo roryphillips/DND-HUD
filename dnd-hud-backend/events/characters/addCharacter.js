@@ -1,6 +1,7 @@
 const uuid = require('uuid/v4');
 module.exports = (socket, store) => {
     socket.on('addCharacter', (data) => {
+        console.log('Add Character Event');
         if (data.id) {
             const state = store.getState();
             const inputCharacter = data.character;

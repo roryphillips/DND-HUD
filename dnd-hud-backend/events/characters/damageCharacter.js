@@ -1,5 +1,6 @@
 module.exports = (socket, store) => {
     socket.on('damageCharacters', (data) => {
+        console.log('Damage Characters Event');
         if (data.damage) {
             for (const id of data.ids) {
                 const state = store.getState();

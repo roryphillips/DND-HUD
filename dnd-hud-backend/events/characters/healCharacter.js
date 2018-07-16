@@ -1,5 +1,6 @@
 module.exports = (socket, store) => {
     socket.on('healCharacters', (data) => {
+        console.log('Heal Characters Event');
         if (data.healing) {
             for (const id of data.ids) {
                 const state = store.getState();

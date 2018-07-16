@@ -1,5 +1,6 @@
 module.exports = (socket, store) => {
     socket.on('showHideCharacters', (data) => {
+        console.log('Show Hide Characters Event');
         for (const id of data.ids) {
             const state = store.getState();
             const character = state.characters[id];
