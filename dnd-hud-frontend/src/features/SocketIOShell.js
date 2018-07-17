@@ -2,9 +2,10 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 import io from 'socket.io-client';
-import {addCharacter} from "../store/actions/character";
+import {addCharacter, characterUpdated, syncCharacters} from "../store/actions/character";
 
 export const SocketContext = React.createContext(null);
+
 class SocketIOShell extends Component {
     dispatch;
 
@@ -18,7 +19,11 @@ class SocketIOShell extends Component {
     }
 
     componentDidMount() {
-        const socket = io.connect(`http://localhost:4000`);
+        const host = process.env.NODE_ENV === 'Production'
+            ? window.location.host
+            : 'http://localhost:4000';
+
+        const socket = io.connect(host);
         this.setState({
             socket: socket,
         });
@@ -63,12 +68,16 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapSocketToDispatch(socket, dispatch) {
+    socket.on('syncCharacters', (data) => {
+        dispatch(syncCharacters(data || {}));
+    });
+
     socket.on('characterAdded', (data) => {
         dispatch(addCharacter(data.id, data.character));
     });
 
     socket.on('characterUpdated', (data) => {
-        console.log(data);
+        dispatch(characterUpdated(data.id, data.character));
     });
 
     socket.on('characterRemoved', (data) => {

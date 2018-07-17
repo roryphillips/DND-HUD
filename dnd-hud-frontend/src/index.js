@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom';
 import {Provider} from "react-redux";
 
 import './index.css';
-import App from './App';
+import RootContainer from './features/RootContainer';
 
 import registerServiceWorker from './registerServiceWorker';
-import SocketIOShell from "./containers/SocketIOShell";
+import SocketIOShell from "./features/SocketIOShell";
 import configureStore from './store/configureStore';
 
 const store = configureStore({});
@@ -14,7 +14,7 @@ const store = configureStore({});
 ReactDOM.render(
     <Provider store={store}>
         <SocketIOShell>
-            <App />
+            <RootContainer />
         </SocketIOShell>
     </Provider>
 , document.getElementById('root'));
