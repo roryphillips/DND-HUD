@@ -1,4 +1,6 @@
 module.exports = (socket, store) => {
+    console.log('Remove Character Event');
+
     socket.on('removeCharacter', (data) => {
         if (data.id) {
             const state = store.getState();

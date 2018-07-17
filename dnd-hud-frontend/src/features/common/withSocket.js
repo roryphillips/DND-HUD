@@ -1,5 +1,5 @@
 import React from "react";
-import {SocketContext} from './SocketIOShell';
+import {SocketContext} from '../SocketIOShell';
 
 export function withSocket(Component) {
     return function SocketComponent(props) {

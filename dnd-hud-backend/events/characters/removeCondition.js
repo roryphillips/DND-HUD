@@ -1,4 +1,6 @@
 module.exports = (socket, store) => {
+    console.log('Remove Condition Event');
+
     socket.on('removeCharacterCondition', (data) => {
         if (data.condition) {
             const state = store.getState();
