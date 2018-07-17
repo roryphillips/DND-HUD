@@ -28,7 +28,7 @@ export default class DynamicForm extends Component {
         })(this.renderControl(control));
 
         return (
-            <Form.Item key={key} label={control.label}>
+            <Form.Item key={key} label={control.label} {...this.formItemLayout}>
                 {decoratedControl}
             </Form.Item>
         );

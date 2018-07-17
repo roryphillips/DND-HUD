@@ -60,7 +60,6 @@ export class CharacterListItem extends Component {
                     title={`${character.name}`}
                     extra={`${character.gender} - ${character.race}`}
                     >
-                    <Avatar shape="square" size="large" icon="user"/>
                     <h3>{this.getDescriptionForPercentage(hpPercentage)}</h3>
                 </Card>
                 }
