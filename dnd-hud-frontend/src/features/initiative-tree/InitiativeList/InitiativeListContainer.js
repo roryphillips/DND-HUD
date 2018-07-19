@@ -6,7 +6,8 @@ function mapStateToProps(state, ownProps) {
     console.log(state.initiative);
 
     return {
-        initiative: state.initiative
+        initiative: state.initiative,
+        isDM: state.ui.isDM
     };
 }
 

@@ -26,7 +26,7 @@ export class Root extends Component {
                 <Content style={{ padding: '0 50px' }}>
                     <Row gutter={16}>
                         {this.props.isDM &&
-                        <Col span={6} style={{textAlign: 'left'}}>
+                        <Col span={4} style={{textAlign: 'left'}}>
                             <AddEntryContainer/>
                             <DamageEntriesContainer/>
                             <HealEntriesContainer/>
@@ -35,16 +35,14 @@ export class Root extends Component {
                             <SetInitiativeContainer/>
 
                         </Col>}
-                        <Col span={this.props.isDM ? 18 : 24}>
+                        <Col span={this.props.isDM ? 20 : 24}>
                             <CharacterListContainer/>
                         </Col>
                     </Row>
                     <Row>
-                        {this.props.isDM && (
-                            <Col span={24}>
-                                <InitiativeListContainer/>
-                            </Col>
-                        )}
+                        <Col span={24}>
+                            <InitiativeListContainer/>
+                        </Col>
                     </Row>
                 </Content>
                 <Footer style={{ textAlign: 'center' }}>

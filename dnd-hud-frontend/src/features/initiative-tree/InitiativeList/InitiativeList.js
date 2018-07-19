@@ -17,17 +17,26 @@ export class InitiativeList extends Component {
     };
 
     render() {
+        const {isDM} = this.props;
         const {currentTurn, initiativeOrder} = this.props.initiative || {};
         const initiative = this.sortInitiative(currentTurn || 0, initiativeOrder || []);
 
         return (
             <div>
-                <h3>Initiative Order</h3>
-                    {initiative.map((entry, index) => {
-                        return <div key={entry.name}><p><b>#{index + 1}. {entry.name}</b></p></div>
-                    })}
-            </div>
 
+                {!isDM && initiative.length > 0 && (
+                    <h2>Current Turn:</h2>
+                )}
+                {!isDM && initiative.length > 0 && (
+                    <h3>{initiative[0].name || ''}</h3>
+                )}
+                {isDM && (
+                    <h2>Initiative Order</h2>
+                )}
+                {isDM && initiative.map((entry, index) => {
+                    return <div key={entry.name}><p><b>#{index + 1}. {entry.name}</b></p></div>
+                })}
+            </div>
         );
     }
 }
