@@ -20,9 +20,7 @@ class SocketIOShell extends Component {
     }
 
     componentDidMount() {
-        const host = process.env.NODE_ENV === 'Production'
-            ? window.location.host
-            : 'http://localhost:4000';
+        const host = window.location.host;
 
         const socket = io.connect(host);
         this.setState({
