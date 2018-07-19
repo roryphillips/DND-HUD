@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Component} from 'react';
-import {Card, Progress, Avatar} from 'antd';
+import {Card} from 'antd';
 import './CharacterListItem.css';
 
 
@@ -68,11 +68,9 @@ export class CharacterListItem extends Component {
                     title={`${character.name}`}
                     extra={`${character.level}. ${character.classText}`}
                 >
-                    <Progress
-                        percent={hpPercentage}
-                        format={percent => `${character.currentHealth} / ${character.maximumHealth}`}
-                        status={this.getStatusForPercentage(hpPercentage)}
-                    />
+                    <p className='odometer'>{character.currentHealth} / {character.maximumHealth}hp</p>
+                    <hr/>
+                    <p>"{this.getDescriptionForPercentage(hpPercentage)}"</p>
                 </Card>
                 }
             </div>

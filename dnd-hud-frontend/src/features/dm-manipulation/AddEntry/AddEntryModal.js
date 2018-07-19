@@ -4,7 +4,7 @@ import DynamicForm from "../../common/DynamicForm";
 import {Form, Modal} from "antd";
 
 const template = {
-    layout: "vertical",
+    layout: "horizontal",
     controls: [
         {key: 'type', label: 'Type', type: 'select', options: ['Ally', 'Enemy', 'Neutral']},
         {key: 'name', label: 'Name', type: 'input'},

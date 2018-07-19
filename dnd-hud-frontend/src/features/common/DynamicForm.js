@@ -8,11 +8,11 @@ const Option = Select.Option;
 export default class DynamicForm extends Component {
     formItemLayout = {
         labelCol: {
-            xs: {span: 24},
+            xs: {span: 8},
             sm: {span: 8},
         },
         wrapperCol: {
-            xs: {span: 24},
+            xs: {span: 16},
             sm: {span: 16}
         }
     };
