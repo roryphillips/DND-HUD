@@ -8,11 +8,11 @@ const Option = Select.Option;
 export default class DynamicForm extends Component {
     formItemLayout = {
         labelCol: {
-            xs: {span: 24},
+            xs: {span: 8},
             sm: {span: 8},
         },
         wrapperCol: {
-            xs: {span: 24},
+            xs: {span: 16},
             sm: {span: 16}
         }
     };
@@ -28,7 +28,7 @@ export default class DynamicForm extends Component {
         })(this.renderControl(control));
 
         return (
-            <Form.Item key={key} label={control.label} {...this.formItemLayout}>
+            <Form.Item key={key} label={control.label} {...this.formItemLayout} style={{width: '100%'}}>
                 {decoratedControl}
             </Form.Item>
         );

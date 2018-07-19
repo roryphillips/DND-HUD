@@ -1,16 +1,26 @@
 module.exports = (socket, store) => {
     socket.on('advanceInitiative', (data) => {
         const state = store.getState();
-        const nextTurn = store.currentTurn + 1;
+        const initiative = state.initiative;
+
+        if (!initiative) {
+            return;
+        }
+
+        const nextTurn = initiative.currentTurn === initiative.initiativeOrder.length -1 ?
+            0 :
+            initiative.currentTurn + 1;
+
+        const updatedInitiative = {
+            ...initiative,
+            currentTurn: nextTurn
+        };
 
         store.setState({
             ...state,
-            initiative: {
-                ...state.initiative,
-                currentTurn: nextTurn >= store.entries.length ? 0 : nextTurn
-            }
+            initiative: updatedInitiative
         });
 
-        socket.broadcast.emit('turnUpdated', {currentTurn: store.currentTurn});
+        socket.broadcast.emit('syncInitiative', updatedInitiative);
     });
 };

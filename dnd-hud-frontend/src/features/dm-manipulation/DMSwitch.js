@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Component} from 'react';
-import {Switch} from "antd";
+import {Checkbox, Switch} from "antd";
 
 export class DMSwitch extends Component {
     constructor(props) {
@@ -8,7 +8,8 @@ export class DMSwitch extends Component {
         this.onChange = this.onChange.bind(this);
     }
 
-    onChange(checked) {
+    onChange(e) {
+        const checked = e.target.checked;
         if (!this.props.isDM && checked) {
             this.props.toggle();
         }
@@ -20,8 +21,8 @@ export class DMSwitch extends Component {
     render() {
         return (
             <div>
-                <p>Enable DM Mode?</p>
-                <Switch defaultChecked={this.props.isDM} onChange={this.onChange}/>
+                <span>Enable DM Mode?</span>
+                <Checkbox defaultChecked={this.props.isDM} onChange={this.onChange}/>
             </div>
 
         );
