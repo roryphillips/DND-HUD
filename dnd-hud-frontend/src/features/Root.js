@@ -26,7 +26,7 @@ export class Root extends Component {
                 <Content style={{ padding: '0 50px' }}>
                     <Row gutter={16}>
                         {this.props.isDM &&
-                        <Col span={3} style={{textAlign: 'left'}}>
+                        <Col span={6} style={{textAlign: 'left'}}>
                             <AddEntryContainer/>
                             <DamageEntriesContainer/>
                             <HealEntriesContainer/>
@@ -35,7 +35,7 @@ export class Root extends Component {
                             <SetInitiativeContainer/>
 
                         </Col>}
-                        <Col span={this.props.isDM ? 16 : 18}>
+                        <Col span={this.props.isDM ? 18 : 24}>
                             <CharacterListContainer/>
                         </Col>
                     </Row>

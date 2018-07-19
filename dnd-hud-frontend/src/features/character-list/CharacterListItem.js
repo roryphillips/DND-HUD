@@ -68,7 +68,7 @@ export class CharacterListItem extends Component {
                     title={`${character.name}`}
                     extra={`${character.level}. ${character.classText}`}
                 >
-                    <p className='odometer'>{character.currentHealth} / {character.maximumHealth}hp</p>
+                    <p className='odometer'>{character.currentHealth} / {character.maximumHealth}hp ({hpPercentage}%)</p>
                     <hr/>
                     <p>"{this.getDescriptionForPercentage(hpPercentage)}"</p>
                 </Card>

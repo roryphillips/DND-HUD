@@ -3,7 +3,11 @@ import {Component} from 'react';
 
 export class InitiativeList extends Component {
     getSortScore(currentTurn, initiative) {
-        
+        const score = initiative.score;
+        if (score < currentTurn) {
+            return score + 100;
+        }
+        return score;
     }
 
     sortInitiative = (currentTurn, initiativeOrder) => {
