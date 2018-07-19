@@ -7,6 +7,8 @@ import DMSwitchContainer from "./dm-manipulation/DMSwitchContainer";
 import DamageEntriesContainer from "./dm-manipulation/DamageEntries/DamageEntriesContainer";
 import HealEntriesContainer from "./dm-manipulation/HealEntries/HealEntriesContainer";
 import ShowEntriesContainer from "./dm-manipulation/ShowEntriesContainer";
+import SetInitiativeContainer from "./initiative-tree/SetInitiative/SetInitiativeContainer";
+import InitiativeListContainer from "./initiative-tree/InitiativeList/InitiativeListContainer";
 
 const { Header, Content, Footer } = Layout;
 
@@ -29,13 +31,20 @@ export class Root extends Component {
                             <DamageEntriesContainer/>
                             <HealEntriesContainer/>
                             <ShowEntriesContainer/>
+                            <hr/>
+                            <SetInitiativeContainer/>
+
                         </Col>}
                         <Col span={this.props.isDM ? 16 : 18}>
                             <CharacterListContainer/>
                         </Col>
-                        <Col span={this.props.isDM ? 5 : 6}>
-                            An Initiative Ladder Goes Here
-                        </Col>
+                    </Row>
+                    <Row>
+                        {this.props.isDM && (
+                            <Col span={24}>
+                                <InitiativeListContainer/>
+                            </Col>
+                        )}
                     </Row>
                 </Content>
                 <Footer style={{ textAlign: 'center' }}>

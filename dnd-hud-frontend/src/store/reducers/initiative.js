@@ -1,4 +1,4 @@
-import {SET_INITIATIVE, UPDATE_INITIATIVE} from "../actions/initiative";
+import {SET_INITIATIVE, SYNC_INITIATIVE} from "../actions/initiative";
 
 export default function initiative(state = {
     currentTurn: 0,
@@ -11,7 +11,7 @@ export default function initiative(state = {
                 initiativeOrder: action.initiativeOrder
             };
 
-        case UPDATE_INITIATIVE:
+        case SYNC_INITIATIVE:
             return {
                 ...state,
                 currentTurn: action.currentTurn,

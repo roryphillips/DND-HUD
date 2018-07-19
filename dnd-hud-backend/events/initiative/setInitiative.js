@@ -9,15 +9,17 @@ module.exports = (socket, store) => {
                 }
             }).sort((a, b) => a.score > b.score);
 
+            const updatedInitiative = {
+                currentTurn: 0,
+                initiativeOrder: initiativeEntries
+            };
+
             store.setState({
                 ...state,
-                initiative: {
-                    currentTurn: 0,
-                    initiativeOrder: initiativeEntries
-                }
+                initiative: updatedInitiative
             });
 
-            socket.broadcast.emit('initiativeUpdated', initiativeEntries);
+            socket.broadcast.emit('syncInitiative', updatedInitiative);
         }
     });
 };

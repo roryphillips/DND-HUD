@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 
 import io from 'socket.io-client';
 import {addCharacter, characterUpdated, syncCharacters} from "../store/actions/character";
-import {updateInitiative} from "../store/actions/initiative";
+import {syncInitiative} from "../store/actions/initiative";
 
 export const SocketContext = React.createContext(null);
 
@@ -85,8 +85,8 @@ function mapSocketToDispatch(socket, dispatch) {
         console.log(data);
     });
 
-    socket.on('initiativeUpdated', (data) => {
-        dispatch(updateInitiative(data.currentTurn, data.initiativeOrder));
+    socket.on('syncInitiative', (data) => {
+        dispatch(syncInitiative(data.currentTurn, data.initiativeOrder));
     });
 
     socket.on('turnUpdated', (data) => {

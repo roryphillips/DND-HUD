@@ -1,5 +1,5 @@
 export const SET_INITIATIVE = 'SET_INITIATIVE';
-export const UPDATE_INITIATIVE = 'UPDATE_INITIATIVE';
+export const SYNC_INITIATIVE = 'SYNC_INITIATIVE';
 
 export function setInitiative(initiativeOrder) {
     return {
@@ -8,9 +8,9 @@ export function setInitiative(initiativeOrder) {
     };
 }
 
-export function updateInitiative(currentTurn, initiativeOrder) {
+export function syncInitiative(currentTurn, initiativeOrder) {
     return {
-        type: UPDATE_INITIATIVE,
+        type: SYNC_INITIATIVE,
         currentTurn,
         initiativeOrder
     }
