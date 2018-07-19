@@ -9,6 +9,7 @@ import HealEntriesContainer from "./dm-manipulation/HealEntries/HealEntriesConta
 import ShowEntriesContainer from "./dm-manipulation/ShowEntriesContainer";
 import SetInitiativeContainer from "./initiative-tree/SetInitiative/SetInitiativeContainer";
 import InitiativeListContainer from "./initiative-tree/InitiativeList/InitiativeListContainer";
+import AdvanceInitiativeContainer from "./initiative-tree/AdvanceInitiative/AdvanceInitiativeContainer";
 
 const { Header, Content, Footer } = Layout;
 
@@ -33,7 +34,7 @@ export class Root extends Component {
                             <ShowEntriesContainer/>
                             <hr/>
                             <SetInitiativeContainer/>
-
+                            <AdvanceInitiativeContainer/>
                         </Col>}
                         <Col span={this.props.isDM ? 20 : 24}>
                             <CharacterListContainer/>
