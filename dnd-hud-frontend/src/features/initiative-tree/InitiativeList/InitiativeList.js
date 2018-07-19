@@ -2,24 +2,14 @@ import * as React from 'react';
 import {Component} from 'react';
 
 export class InitiativeList extends Component {
-    getSortScore(currentTurn, initiative) {
-        const score = initiative.score;
-        if (score < currentTurn) {
-            return score + 100;
-        }
-        return score;
-    }
-
-    sortInitiative = (currentTurn, initiativeOrder) => {
-        return initiativeOrder.sort((a, b) => {
-            return this.getSortScore(currentTurn, b) - this.getSortScore(currentTurn, a);
-        });
-    };
-
     render() {
         const {isDM} = this.props;
         const {currentTurn, initiativeOrder} = this.props.initiative || {};
-        const initiative = this.sortInitiative(currentTurn || 0, initiativeOrder || []);
+        const sortedInitiative = initiativeOrder.sort((a, b) => a.score > b.score);
+        const initiative = [
+            ...sortedInitiative.slice(currentTurn, initiativeOrder.length),
+            ...sortedInitiative.slice(0, currentTurn)
+        ];
 
         return (
             <div>
@@ -34,7 +24,10 @@ export class InitiativeList extends Component {
                     <h2>Initiative Order</h2>
                 )}
                 {isDM && initiative.map((entry, index) => {
-                    return <div key={entry.name}><p><b>#{index + 1}. {entry.name}</b></p></div>
+                    return <div key={entry.name}><p>
+                        {index === 0 && 'Current Turn: '}
+                        {index === 1 && 'Next Turn: '}
+                        <b>{entry.name}</b></p></div>
                 })}
             </div>
         );

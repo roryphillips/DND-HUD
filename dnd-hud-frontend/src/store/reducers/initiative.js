@@ -12,19 +12,11 @@ export default function initiative(state = {
             };
 
         case ADVANCE_INITIATIVE:
-            const lowestInitiativeScore = state.initiativeOrder
-                .reduce((prev, item) => item.score < prev ? item.score : prev, 100);
-
-            const highestInitiativeScore = state.initiativeOrder
-                .reduce((prev, item) => item.score > prev ? item.score : prev, 0);
-
             return {
                 ...state,
-                currentTurn: state.currentTurn <= lowestInitiativeScore ?
-                    highestInitiativeScore :
-                    state.initiativeOrder
-                        .filter(item => item.score < state.currentTurn)
-                        .reduce((prev, item) => item.score < prev ? item.score : prev, state.currentTurn)
+                currentTurn: state.currentTurn === state.initiativeOrder.length -1 ?
+                    0 :
+                    state.currentTurn + 1
             };
 
         case SYNC_INITIATIVE:
