@@ -7,9 +7,16 @@ module.exports = (socket, store) => {
             return;
         }
 
-        const nextTurn = initiative.currentTurn <= 0 ?
-            initiative.initiativeOrder
-                .reduce((prev, item) => item.score < prev ? item.score : prev, 100) :
+        console.log(initiative.initiativeOrder);
+
+        const lowestInitiativeScore = initiative.initiativeOrder
+            .reduce((prev, item) => item.score < prev ? item.score : prev, 100);
+
+        const highestInitiativeScore = initiative.initiativeOrder
+            .reduce((prev, item) => item.score > prev ? item.score : prev, 0);
+
+        const nextTurn = initiative.currentTurn === lowestInitiativeScore ?
+            highestInitiativeScore :
             initiative.initiativeOrder
                 .filter(item => item.score <= initiative.currentTurn)
                 .reduce((prev, item) => item.score < prev ? item.score : prev, 100);
